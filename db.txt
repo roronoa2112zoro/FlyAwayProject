@@ -1,0 +1,54 @@
+Schema name - flyaway
+
+Table details:
+
+CREATE TABLE `flyaway`.`features` (
+  `flightId` int unsigned NOT NULL,
+  `className` varchar(100) NOT NULL,
+  `price` int unsigned NOT NULL,
+  PRIMARY KEY (`flightId`,`className`),
+  CONSTRAINT `feature_ibfk_1` FOREIGN KEY (`flightId`) REFERENCES `flights` (`FlightId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `features` VALUES (1,'Business',2500),(1,'Economy',5000),(1,'First',1000),(2,'Business',2500),(2,'Economy',5000),(2,'First',1000),(3,'Business',2500),(3,'Economy',5000),(3,'First',1000),(4,'Business',2500),(4,'Economy',5000),(4,'First',1000),(5,'Business',2500),(5,'Economy',5000),(5,'First',1000),(6,'Business',5000),(6,'Economy',3000),(6,'First',1500),(7,'Business',2500),(7,'Economy',3500),(7,'First',1000),(8,'Business',5000),(8,'Economy',2500),(8,'First',2000),(9,'Business',2500),(9,'Economy',5000),(9,'First',1000),(10,'Business',2500),(10,'Economy',5000),(10,'First',1000);
+
+
+CREATE TABLE `flyaway`.`flights` (
+  `FlightId` int unsigned NOT NULL,
+  `FlightName` varchar(100) NOT NULL,
+  `Departure` varchar(40) NOT NULL,
+  `Arrival` varchar(40) NOT NULL,
+  `DepartureDate` date NOT NULL,
+  `ArrivalDate` date NOT NULL,
+  `TotalSeats` int NOT NULL,
+  `Economy` int NOT NULL,
+  `Business` int NOT NULL,
+  `First` int NOT NULL,
+  PRIMARY KEY (`FlightId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `flights` VALUES (1,'PK-789','Lahore','Karachi','2021-11-05','2021-11-05',12,5,4,3),(2,'PK-790','Mumbai','Delhi','2021-11-06','2021-11-06',10,3,2,5),(3,'PK-791','Mumbai','Delhi','2021-11-06','2021-11-06',10,4,3,3),(4,'PK-792','Mumbai','Delhi','2021-11-06','2021-11-06',12,5,4,3),(5,'PK-793','Mumbai','Delhi','2021-12-06','2021-12-06',15,5,5,5),(6,'PK-794','Delhi','Mumbai','2021-01-21','2021-01-21',15,5,5,5),(7,'PK-795','Bangalore','Chennai','2021-11-06','2021-11-06',20,5,5,10),(8,'PK-796','Hyderabad','Bangalore','2021-11-05','2021-11-05',10,3,2,3),(9,'PK-791','Bangalore','Hyderabad','2021-11-05','2021-11-05',10,3,2,3),(10,'PK-792','Pune','Delhi','2021-11-05','2021-11-05',10,3,2,3);
+
+
+CREATE TABLE `flyaway`.`seats` (
+  `flightId` int unsigned NOT NULL,
+  `seatNumber` int unsigned NOT NULL,
+  `className` varchar(100) NOT NULL,
+  PRIMARY KEY (`flightId`,`seatNumber`),
+  CONSTRAINT `seats_ibfk_1` FOREIGN KEY (`flightId`) REFERENCES `flights` (`FlightId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `seats` VALUES (1,101,'Economy'),(1,102,'First'),(1,103,'Business'),(1,104,'Economy'),(1,105,'First'),(1,106,'Economy'),(1,107,'Business'),(1,108,'Business'),(1,109,'Economy'),(1,110,'Business'),(1,111,'Economy'),(1,112,'Business'),(2,101,'First'),(2,102,'First'),(2,105,'Business'),(2,106,'Economy'),(2,107,'First'),(2,108,'Business'),(2,109,'Economy'),(2,110,'First'),(2,112,'Economy'),(2,113,'Business'),(3,101,'Business'),(3,102,'Economy'),(3,103,'First'),(3,104,'Economy'),(3,107,'First'),(3,108,'Business'),(3,109,'Economy'),(3,110,'First'),(3,112,'Economy'),(3,113,'Business'),(4,101,'First'),(4,102,'Economy'),(4,103,'Economy'),(4,104,'Economy'),(4,105,'Business'),(4,106,'Economy'),(4,107,'First'),(4,108,'Business'),(4,109,'Business'),(4,110,'First'),(4,112,'Economy'),(4,113,'Business'),(5,141,'Economy'),(5,142,'First'),(5,143,'First'),(5,144,'Economy'),(5,145,'Economy'),(5,146,'Economy'),(5,147,'Business'),(5,148,'Economy'),(5,149,'Business'),(5,150,'Business'),(5,151,'First'),(5,152,'First'),(5,153,'First'),(5,156,'Business'),(5,160,'Business'),(6,101,'Business'),(6,102,'Economy'),(6,103,'Economy'),(6,104,'Economy'),(6,105,'Business'),(6,106,'Economy'),(6,107,'First'),(6,108,'First'),(6,109,'Business'),(6,110,'First'),(6,112,'Economy'),(6,113,'Business'),(6,114,'First'),(6,115,'First'),(6,116,'Business'),(7,101,'Business'),(7,102,'Economy'),(7,103,'First'),(7,104,'Economy'),(7,105,'First'),(7,106,'First'),(7,109,'Business'),(7,114,'First'),(7,115,'First'),(7,116,'Business'),(7,151,'First'),(7,152,'First'),(7,153,'First'),(7,154,'First'),(7,155,'First'),(7,156,'Business'),(7,157,'Economy'),(7,158,'Economy'),(7,159,'Economy'),(7,160,'Business'),(8,101,'Business'),(8,103,'First'),(8,104,'Economy'),(8,105,'First'),(8,106,'First'),(8,116,'Business'),(8,158,'Economy'),(8,159,'Economy'),(9,101,'Business'),(9,103,'First'),(9,104,'Economy'),(9,105,'First'),(9,106,'First'),(9,116,'Business'),(9,158,'Economy'),(9,159,'Economy'),(10,101,'Business'),(10,103,'First'),(10,104,'Economy'),(10,105,'First'),(10,106,'First'),(10,116,'Business'),(10,158,'Economy'),(10,159,'Economy');
+
+
+
+CREATE TABLE `flyaway`.`users` (
+  `userId` int unsigned NOT NULL,
+  `firstName` varchar(100) NOT NULL,
+  `lastName` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  PRIMARY KEY (`userId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `users` VALUES (101,'Admin','admin','admin@flyaway.com','admin');
